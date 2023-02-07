@@ -1,6 +1,7 @@
 package store.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -194,5 +195,9 @@ public class StoreController {
 	@DeleteMapping(path = "adminStoreDel")
 	public void adminStoreDel(@RequestParam String store_seq) {
 		storeService.adminStoreDel(store_seq);
+	}
+	@GetMapping(path = "adminStoreSearch")
+	public List<StoreDTO> adminStoreSearch(@RequestParam Map<String, String> map){
+		return storeService.adminStoreSearch(map);
 	}
 }

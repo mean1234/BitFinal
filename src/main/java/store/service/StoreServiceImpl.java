@@ -1,6 +1,7 @@
 package store.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +155,17 @@ public class StoreServiceImpl implements StoreService {
 	public void adminStoreDel(String store_seq) {
 		storeDAO.deleteByAdminStoreDel(store_seq);
 		
+	}
+
+	@Override
+	public List<StoreDTO> adminStoreSearch(Map<String, String> map) {
+		String adminStoreSearchOption = map.get("adminStoreSearchOption");
+		String adminStoreSearchKeyword = map.get("adminStoreSearchKeyword");
+		
+		if(adminStoreSearchOption.equals("subject"))
+			return storeDAO.getAdminStoreSubject(adminStoreSearchKeyword);
+		else 
+			return storeDAO.getAdminStoreContent(adminStoreSearchKeyword);
 	}
 	
 }

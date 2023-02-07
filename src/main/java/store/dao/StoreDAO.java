@@ -52,5 +52,13 @@ public interface StoreDAO extends JpaRepository<StoreDTO, Long>{
 	@Modifying
 	@Query(value = "delete from storetable where store_seq=:store_seq",nativeQuery = true)
 	public void deleteByAdminStoreDel(@Param("store_seq") String store_seq);
+
+	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.subject like '%' || :adminStoreSearchKeyword || '%'")
+	public List<StoreDTO> getAdminStoreSubject(@Param("adminStoreSearchKeyword") String adminStoreSearchKeyword);
+
+	@Query("select storeDTO from StoreDTO storeDTO where storeDTO.content like '%' || :adminStoreSearchKeyword || '%'")
+	public List<StoreDTO> getAdminStoreContent(@Param("adminStoreSearchKeyword") String adminStoreSearchKeyword);
+	
+	
 	
 }
