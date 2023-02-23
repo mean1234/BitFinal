@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -196,8 +197,22 @@ public class StoreController {
 	public void adminStoreDel(@RequestParam String store_seq) {
 		storeService.adminStoreDel(store_seq);
 	}
+	
+	// 관리자 store 검색
 	@GetMapping(path = "adminStoreSearch")
 	public List<StoreDTO> adminStoreSearch(@RequestParam Map<String, String> map){
 		return storeService.adminStoreSearch(map);
+	}
+	
+//	관리자 store 수정 전 데이터 불러오기
+	@GetMapping(path="getAdminStoreList")
+	public Optional <StoreDTO> getAdminStoreList(@RequestParam int store_seq){
+		return storeService.getAdminStoreList(store_seq);
+	}
+
+//	관리자 store 상품 수정
+	@PutMapping(path="storeUpdate")
+	public void storeUpdate(@ModelAttribute StoreDTO storeDTO) {
+		storeService.storeUpdate(storeDTO);
 	}
 }
