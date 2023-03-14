@@ -16,10 +16,10 @@ import movie.bean.TrailerDTO;
 public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' or movieDTO.movie_already_released  = '1' or movieDTO.movie_class = '1' or movieDTO.movie_class = '3' or movieDTO.movie_class = '4' or movieDTO.movie_class = '5' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_boxoffice();
 	
-	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
+	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_already_released = '0' ORDER BY movieDTO.movie_reserve_rate DESC")
 	public List<MovieDTO> getMovieList_already_on_boxoffice();
 	
 	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_title like '%' || :keyword || '%' AND movieDTO.movie_class = '1' ORDER BY movieDTO.movie_reserve_rate DESC")
@@ -67,7 +67,6 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Transactional
 	@Query(value="update movietable set movie_like = movie_like - 1 where movie_title = :movie_title", nativeQuery = true)
 	public void movie_like_minus_one(@Param("movie_title") String movie_title);
- 
 	
 	//관리자 페이지 무비 리스트 삭제
 	@Transactional 
@@ -82,8 +81,8 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Query("select movieDTO from MovieDTO movieDTO where movieDTO.movie_subtitle like '%' || :adminMovieSearchKeyword || '%'")
 	public List<MovieDTO> getAdminMovieSearchSubTitle(@Param("adminMovieSearchKeyword")String adminMovieSearchKeyword);
 
-	@Query("select m.movie_poster_url from MovieDTO m where m.movie_title = ?1")
+	@Query(value = "select m.movie_poster_url from MovieDTO m where m.movie_title = ?1")
 	public String getMovieURL(String title);
-
-
+	 
+	
 }
