@@ -67,6 +67,8 @@ public interface MovieService {
 	
 	public void MovieCommentDelete(String id);
 
+	public List<MovieDTO> adminMovieSearch(Map<String, String> map);
+
 
 
 }
