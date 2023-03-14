@@ -67,6 +67,7 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Transactional
 	@Query(value="update movietable set movie_like = movie_like - 1 where movie_title = :movie_title", nativeQuery = true)
 	public void movie_like_minus_one(@Param("movie_title") String movie_title);
+ 
 	
 	//관리자 페이지 무비 리스트 삭제
 	@Transactional 
@@ -84,5 +85,4 @@ public interface MovieDAO extends JpaRepository<MovieDTO, String>{
 	@Query(value = "select m.movie_poster_url from MovieDTO m where m.movie_title = ?1")
 	public String getMovieURL(String title);
 	 
-	
 }
