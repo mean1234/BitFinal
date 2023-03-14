@@ -210,7 +210,7 @@ public class StoreController {
 		return storeService.getAdminStoreList(store_seq);
 	}
 
-//	관리자 store 상품 수정
+//	관리자 store 상품 수정 추가됨 
 	@PutMapping(path="storeUpdate")
 	public void storeUpdate(@ModelAttribute StoreDTO storeDTO) {
 		storeService.storeUpdate(storeDTO);
